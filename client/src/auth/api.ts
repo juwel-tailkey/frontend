@@ -7,12 +7,21 @@ function getCookie(name: string): string | null {
   return match ? decodeURIComponent(match[2]) : null;
 }
 
+function apiUrl(path: string): string {
+  if (import.meta.env.DEV) {
+    return path;
+  }
+
+  const base = String(import.meta.env.VITE_API_URL ?? "").replace(/\/$/, "");
+  return base ? `${base}${path}` : path;
+}
+
 export async function ensureCsrf(): Promise<void> {
   if (csrfInitialized) {
     return;
   }
 
-  await fetch("/sanctum/csrf-cookie", { credentials: "include" });
+  await fetch(apiUrl("/sanctum/csrf-cookie"), { credentials: "include" });
   csrfInitialized = true;
 }
 
@@ -38,7 +47,7 @@ export async function authFetch(path: string, init?: RequestInit): Promise<Respo
     headers.set("X-XSRF-TOKEN", xsrf);
   }
 
-  return fetch(path, {
+  return fetch(apiUrl(path), {
     ...init,
     credentials: "include",
     headers
