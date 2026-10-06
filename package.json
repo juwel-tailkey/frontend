@@ -1,0 +1,29 @@
+{
+  "name": "bigquery-visualization-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --config client/vite.config.ts",
+    "dev:api": "cd ../backend && php artisan serve --host=127.0.0.1 --port=8000",
+    "build": "vite build --config client/vite.config.ts",
+    "typecheck": "tsc -p client/tsconfig.json --noEmit",
+    "preview": "vite preview --config client/vite.config.ts"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "d3-sankey": "^0.12.3",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^6.30.3"
+  },
+  "devDependencies": {
+    "@types/d3": "^7.4.3",
+    "@types/d3-sankey": "^0.12.5",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.7.0",
+    "typescript": "^6.0.3",
+    "vite": "^6.4.2"
+  }
+}
